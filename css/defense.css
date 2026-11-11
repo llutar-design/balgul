@@ -1,0 +1,161 @@
+/* 부소산을 막아라! (defense) — 접두어 df- */
+.df-root { background: #9fc674; }
+.df-canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; touch-action: none; }
+.df-hud { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
+.df-hud > * { pointer-events: auto; }
+.df-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 36px; color: #fff; background: #3a2412; }
+
+/* 플레이어 패널 (테이블 가장자리) */
+.df-panel {
+  position: absolute; display: flex; align-items: center; gap: 10px; padding: 8px 14px; height: 140px;
+  border-radius: 28px; background: rgba(255,246,224,.96); box-shadow: 0 0 0 5px var(--pc), 0 8px 20px rgba(0,0,0,.35);
+  transform-origin: 50% 50%; touch-action: none;
+}
+.df-panel.side-bottom { left: 350px; top: 932px; width: 1220px; }
+.df-panel.side-top { left: 350px; top: 8px; width: 1220px; transform: rotate(180deg); }
+.df-panel.side-left { left: -272px; top: 470px; width: 690px; transform: rotate(90deg); }
+.df-panel.side-right { left: 1501px; top: 470px; width: 690px; transform: rotate(-90deg); }
+.df-plabel { flex: 0 0 96px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; font-size: 22px; line-height: 1.1; }
+.df-plabel i { width: 30px; height: 30px; border-radius: 50%; background: var(--pc); box-shadow: 0 0 0 4px #fff; }
+.df-plabel small { font-size: 16px; font-weight: 700; color: #6b4423; }
+.df-status { flex: 0 0 180px; white-space: nowrap; font-size: 22px; font-weight: 800; line-height: 1.35; color: #3a2412; }
+.df-status b { font-size: 30px; color: #8a4a10; }
+.df-s3 { font-size: 20px; color: #6b4423; }
+.df-card, .df-act {
+  flex: 0 0 128px; height: 124px; border: 4px solid #d8bf91; border-radius: 20px; background: #fffaf0; padding: 2px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; touch-action: none;
+  transition: transform .1s, opacity .2s;
+}
+.df-card b, .df-act b { font-size: 22px; line-height: 1.1; white-space: nowrap; }
+.df-card small, .df-act small { font-size: 18px; font-weight: 700; color: #7a5a2e; white-space: nowrap; }
+.df-card-ic { width: 70px; height: 62px; pointer-events: none; }
+.df-card { border-color: var(--pc); box-shadow: 0 5px 0 rgba(0,0,0,.15); }
+.df-card.df-press { transform: scale(.94); background: #fff1c9; }
+.df-act { font-size: 34px; }
+.df-off { opacity: .42; filter: grayscale(.9); }
+.df-start { flex-basis: 168px; background: linear-gradient(#ffe08a, #e8b84a); border-color: #9a6a14; }
+.df-start.df-go { animation: dfPulse 1.2s ease-in-out infinite; }
+.df-ready.on { background: #bfe8a8; border-color: #3f8f3a; }
+@keyframes dfPulse { 50% { box-shadow: 0 0 0 6px rgba(255,210,80,.8); } }
+
+/* 공통 조작 버튼 */
+.df-ctl { position: absolute; display: flex; gap: 12px; }
+.df-ctl-bl { left: 70px; top: 946px; }
+.df-ctl-br { left: 1608px; top: 946px; }
+.df-cbtn { width: 96px; height: 96px; border: 0; border-radius: 50%; font-size: 40px; font-weight: 900; background: radial-gradient(circle at 35% 30%, #fff8e6, #e2c88e); box-shadow: 0 0 0 4px #9c7540, 0 6px 12px rgba(0,0,0,.35); }
+.df-cbtn.on { background: radial-gradient(circle at 35% 30%, #fff2b0, #f0b840); }
+.df-cbtn:active { transform: scale(.92); }
+
+/* 시설 말풍선 */
+.df-bubble {
+  position: absolute; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 12px;
+  background: rgba(255,248,232,.97); border-radius: 24px; box-shadow: 0 0 0 5px var(--pc), 0 10px 24px rgba(0,0,0,.35);
+  transform: translate(-50%, -50%) rotate(var(--rot)); touch-action: none;
+}
+.df-bubble h4 { margin: 0; font-size: 24px; }
+.df-bubble h4 span { font-size: 20px; color: #8a4a10; }
+.df-binfo { font-size: 18px; font-weight: 700; color: #6b4423; max-width: 460px; text-align: center; }
+.df-brow { display: flex; gap: 8px; }
+.df-bbtn { width: 108px; height: 96px; border: 3px solid #d8bf91; border-radius: 18px; background: #fffaf0; font-size: 26px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; }
+.df-bbtn b { font-size: 22px; }
+.df-bbtn small { font-size: 16px; font-weight: 700; color: #7a5a2e; white-space: nowrap; }
+.df-bbtn:active { transform: scale(.93); }
+
+/* 연습 안내 */
+.df-banner { position: absolute; left: 50%; display: flex; align-items: center; gap: 16px; padding: 12px 18px 12px 26px; max-width: 1180px;
+  border-radius: 24px; background: rgba(60,35,10,.92); color: #fff6dc; font-size: 26px; font-weight: 800; box-shadow: 0 0 0 4px #ffe14a; }
+.df-banner.side-bottom { bottom: 222px; transform: translateX(-50%); }
+.df-banner.side-top { top: 168px; transform: translateX(-50%) rotate(180deg); }
+.df-banner { font-size: 24px; max-width: 1060px; }
+.df-skip { flex: 0 0 auto; min-height: 72px; padding: 0 18px; border: 0; border-radius: 18px; font-size: 22px; font-weight: 800; background: #fff1c9; color: #3a2412; }
+
+/* 일시정지 */
+.df-pause { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; background: rgba(25,15,6,.55); }
+.df-pause-box { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 40px 70px; border-radius: 36px; background: #fbf1da; box-shadow: 0 0 0 6px #e8b84a; }
+.df-pause-box h2 { margin: 0; font-size: 52px; }
+.df-pause-box p { margin: 0; font-size: 28px; }
+
+/* 화면 공통 */
+.df-screen { position: absolute; inset: 0; z-index: 25; }
+.df-screen.hidden { display: none; }
+.df-sel-bg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.df-title { position: absolute; left: 0; right: 0; top: 40px; text-align: center; pointer-events: none; }
+.df-title h1 { margin: 0; font-size: 92px; color: #fff3cf; text-shadow: 0 5px 0 #8a3a16, 0 10px 0 #4a1f10, 0 18px 30px rgba(0,0,0,.5); }
+.df-title p { margin: 10px 0 0; font-size: 38px; font-weight: 800; color: #fff8e0; text-shadow: 0 3px 8px rgba(0,0,0,.6); }
+.df-sel-info { position: absolute; right: 90px; top: 40px; padding: 14px 26px; border-radius: 30px; background: rgba(40,26,12,.8); color: #fff6dc; font-size: 26px; font-weight: 800; }
+.df-node { position: absolute; width: 170px; height: 170px; margin: -85px 0 0 -85px; border: 0; border-radius: 50%; padding: 0;
+  background: radial-gradient(circle at 35% 30%, #fff6dc, #e8b84a); box-shadow: 0 0 0 6px #8a3a16, 0 10px 24px rgba(0,0,0,.45); }
+.df-node.cleared { background: radial-gradient(circle at 35% 30%, #e8ffd8, #7cc45a); }
+.df-node.final { box-shadow: 0 0 0 6px #8a3a16, 0 0 0 14px #e8b84a, 0 10px 24px rgba(0,0,0,.45); }
+.df-node.locked { background: radial-gradient(circle at 35% 30%, #ddd, #999); }
+.df-node:active { transform: scale(.95); }
+.df-node-n { font-size: 72px; font-weight: 900; color: #3a2412; }
+.df-node-t { position: absolute; left: 50%; top: 182px; transform: translateX(-50%); width: 280px; padding: 8px 10px; border-radius: 18px; background: rgba(255,248,230,.95); box-shadow: 0 4px 10px rgba(0,0,0,.3); }
+.df-node-t b { display: block; font-size: 26px; }
+.df-node-t small { display: block; font-size: 20px; color: #6b4423; font-weight: 700; }
+.df-node-t span { display: block; font-size: 28px; color: #e09a10; letter-spacing: 4px; }
+.df-help-btn { position: absolute; right: 90px; top: 120px; min-height: 92px; font-size: 28px; }
+.df-badges { position: absolute; left: 0; right: 0; bottom: 92px; display: flex; justify-content: center; gap: 12px; pointer-events: none; }
+.df-dim { opacity: .55; filter: grayscale(.8); }
+.df-notice { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); padding: 12px 28px; border-radius: 24px; background: rgba(255,242,200,.95); font-size: 24px; font-weight: 800; color: #6b4423; white-space: nowrap; }
+
+/* 도움말 */
+.df-help h2 { margin: 0 0 16px; font-size: 40px; }
+.df-help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.df-help-it { display: flex; gap: 14px; align-items: center; padding: 10px 16px; border-radius: 20px; background: #fff8e8; border: 3px solid #e3cc9c; }
+.df-help-it.enemy { background: #eef3fa; border-color: #b8c8de; }
+.df-help-it b { font-size: 28px; } .df-help-it b small { font-size: 22px; color: #8a4a10; }
+.df-help-it p { margin: 4px 0; font-size: 22px; line-height: 1.4; }
+.df-role { font-size: 20px; color: #6b4423; font-weight: 700; }
+.df-help-note { font-size: 22px; font-weight: 700; color: #6b4423; background: #fff2c8; padding: 12px 18px; border-radius: 14px; }
+.df-eic { flex: 0 0 auto; }
+
+/* 임무 설명 */
+.df-briefscr, .df-resscr { background: rgba(30,20,8,.82); display: flex; align-items: center; justify-content: center; }
+.df-brief { display: flex; gap: 40px; width: 1640px; padding: 40px 46px; border-radius: 40px; background: #fbf1da; box-shadow: 0 0 0 6px #b5523c, 0 20px 50px rgba(0,0,0,.5); }
+.df-brief-l { flex: 0 0 640px; }
+.df-brief-map { border-radius: 20px; box-shadow: 0 0 0 4px #8a6a3a; }
+.df-brief-en h3 { margin: 18px 0 8px; font-size: 28px; }
+.df-brief-row { display: flex; gap: 14px; }
+.df-brief-e { display: flex; flex-direction: column; align-items: center; padding: 6px 10px; border-radius: 16px; background: #eef3fa; font-size: 22px; }
+.df-brief-r { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.df-brief-no { font-size: 26px; font-weight: 800; color: #b5523c; }
+.df-brief-r h2 { margin: 0; font-size: 60px; }
+.df-goals { margin: 0; padding-left: 40px; font-size: 28px; font-weight: 700; line-height: 1.6; }
+.df-roles { display: flex; flex-wrap: wrap; gap: 10px; }
+.df-rolechip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 20px; background: #fff; font-size: 22px; font-weight: 800; border: 2px solid #e3cc9c; }
+.df-rolechip i { width: 22px; height: 22px; border-radius: 50%; display: inline-block; }
+.df-brief-btns, .df-res-btns { display: flex; gap: 22px; margin-top: 8px; }
+
+/* 시뮬레이션 / 실제 역사 상자 */
+.df-simbox, .df-histbox { padding: 16px 22px; border-radius: 22px; font-size: 24px; line-height: 1.5; }
+.df-simbox { background: #e9f4ff; border: 4px dashed #5a8fc4; }
+.df-histbox { background: #fff4dc; border: 4px solid #b98522; }
+.df-simbox h4, .df-histbox h4 { margin: 0 0 6px; font-size: 26px; }
+.df-histbox h4 small { font-size: 20px; color: #8a4a10; margin-left: 10px; }
+.df-simbox p, .df-histbox p { margin: 4px 0; }
+.df-simbox small, .df-histbox small { display: block; font-size: 20px; color: #5d4a30; }
+.df-simbox.small p { font-size: 24px; }
+.df-hcard { display: flex; gap: 14px; }
+.df-hicon { font-size: 64px; line-height: 1; }
+.df-hcard b { font-size: 28px; }
+.df-src { margin-top: 4px; }
+.df-more { font-size: 22px; font-weight: 700; }
+.df-final-note { margin: 0; padding: 12px 18px; border-radius: 16px; background: #ffe3d6; border: 3px solid #c0553a; font-size: 23px; font-weight: 800; color: #6b2a14; }
+
+/* 결과 */
+.df-result { position: relative; width: 1560px; padding: 30px 46px 36px; border-radius: 40px; background: #fbf1da; box-shadow: 0 0 0 6px #e8b84a, 0 20px 50px rgba(0,0,0,.5); display: flex; flex-direction: column; gap: 14px; transition: transform .4s; }
+.df-result.lose { box-shadow: 0 0 0 6px #9a8a7a, 0 20px 50px rgba(0,0,0,.5); }
+.df-result.flipped { transform: rotate(180deg); }
+.df-result h2 { margin: 0; text-align: center; font-size: 60px; }
+.df-res-tools { position: absolute; right: 30px; top: 24px; }
+.df-flip { min-height: 72px; padding: 0 20px; border: 3px solid #d8bf91; border-radius: 20px; background: #fff; font-size: 22px; font-weight: 800; }
+.df-stars { text-align: center; font-size: 80px; line-height: 1; color: #d9cbb0; }
+.df-stars .on { color: #f2b81a; text-shadow: 0 4px 0 #a26a0a; }
+.df-stars small { font-size: 30px; color: #6b4423; }
+.df-res-stats { margin: 0; text-align: center; font-size: 26px; }
+.df-res-badge { text-align: center; }
+.df-new { color: #c0392b; font-size: 24px; }
+.df-res-boxes { display: grid; grid-template-columns: 1fr 1.25fr; gap: 20px; }
+.df-res-btns { justify-content: center; }
+.df-ctl-br .df-cbtn { font-size: 30px; }

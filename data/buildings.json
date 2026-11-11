@@ -1,0 +1,112 @@
+{
+  "_설명": "백제마을 만들기 건물 자료. w×h=차지하는 칸(회전하면 바뀜), cost=짓는 비용(보통 난이도 기준, food 식량·wood 나무·clay 흙과 건축 재료), prod=생산 주기(3초)마다 만드는 양, pop=사는 주민 수, rule=지을 수 있는 땅(land 빈 땅·평야 / plain 평야만 / shore 강에 닿는 땅 / gate 도로와 닿는 땅), hill=언덕에도 지을 수 있음, needsRoad=도로와 닿지 않으면 생산 절반, unlock=이 미션을 해결하면 열림(null=처음부터), card=역사 도감 카드 id, extra=처음 지을 때 함께 등록되는 카드, info=건물 설명(창작 재현 여부 포함). 모양과 수치는 교육용 단순화예요.",
+  "list": [
+    { "id": "road", "name": "도로", "short": "도로", "group": "life", "icon": "🛤️", "w": 1, "h": 1,
+      "cost": { "clay": 1 }, "prod": {}, "pop": 0, "rule": "road", "hill": true, "needsRoad": false, "unlock": null, "card": "", "extra": [],
+      "effect": "손가락으로 끌면 지나간 칸에 도로가 깔려요. 건물을 도로와 이으면 일을 제대로 해요(도로가 없으면 생산 절반). 주민은 도로를 따라 걸어 다녀요.",
+      "ruleText": "빈 땅·평야·언덕 (강과 숲은 안 돼요)",
+      "info": "흙을 다져 만든 길을 단순하게 그린 그림이에요." },
+
+    { "id": "house", "name": "초가집", "short": "초가집", "group": "life", "icon": "🛖", "w": 1, "h": 1,
+      "cost": { "wood": 5, "clay": 2 }, "prod": { "wood": 1 }, "pop": 3, "rule": "land", "hill": false, "needsRoad": true, "unlock": null, "card": "bld-house", "extra": ["his-life"],
+      "effect": "주민 3명이 살아요. 숲에서 2칸 안에 있으면 주민이 나무를 조금 해 와요(🪵+1).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "게임 속 초가집 모양은 살림집 유적을 참고해 상상으로 그린 창작 재현이에요." },
+
+    { "id": "tilehouse", "name": "기와집", "short": "기와집", "group": "life", "icon": "🏠", "w": 2, "h": 2,
+      "cost": { "wood": 10, "clay": 14 }, "prod": { "culture": 1 }, "pop": 5, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m3", "card": "bld-tilehouse", "extra": ["art-roof-tile"],
+      "effect": "주민 5명이 살고, 문화 점수가 조금 올라요(✨+1).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "기와는 만들기 어려워 주로 중요한 건물에 쓰였어요. 일반 백성이 기와집에 얼마나 살았는지는 확실하지 않아요. 게임 속 모양은 창작 재현이에요." },
+
+    { "id": "well", "name": "우물", "short": "우물", "group": "life", "icon": "💧", "w": 1, "h": 1,
+      "cost": { "clay": 6 }, "prod": {}, "pop": 0, "rule": "land", "hill": false, "needsRoad": false, "unlock": null, "card": "bld-well", "extra": [],
+      "effect": "3칸 안에 있는 집마다 주민 +1명, 3칸 안 농경지 식량 +1.",
+      "ruleText": "빈 땅이나 평야",
+      "info": "사비 도성 유적에서는 돌을 쌓은 우물이 여러 곳 발견되었어요. 게임 속 기둥과 두레박 모양은 창작 재현이에요." },
+
+    { "id": "storage", "name": "저장 창고", "short": "창고", "group": "life", "icon": "📦", "w": 2, "h": 2,
+      "cost": { "wood": 12, "clay": 6 }, "prod": {}, "pop": 0, "rule": "land", "hill": false, "needsRoad": false, "unlock": null, "card": "bld-storage", "extra": [],
+      "effect": "식량·나무·흙을 더 많이 모아 둘 수 있어요(창고마다 +200).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "부여 관북리 유적에서는 땅을 파고 만든 저장 시설이 확인되었어요. 게임 속 높은 마루 창고 모양은 창작 재현이에요." },
+
+    { "id": "market", "name": "시장", "short": "시장", "group": "life", "icon": "🏪", "w": 2, "h": 2,
+      "cost": { "wood": 15, "clay": 10, "food": 10 }, "prod": { "food": 1, "wood": 1 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m1", "card": "bld-market", "extra": [],
+      "effect": "물건을 바꾸어 식량과 나무가 조금씩 들어와요. 같은 도로로 이어진 공방은 생산이 1.5배가 돼요.",
+      "ruleText": "빈 땅이나 평야",
+      "info": "사비 도성의 시장이 정확히 어디에 있었는지는 아직 밝혀지지 않았어요. 게임 속 장터 모습은 창작 재현이에요." },
+
+    { "id": "farm", "name": "농경지(논과 밭)", "short": "농경지", "group": "prod", "icon": "🌾", "w": 2, "h": 2,
+      "cost": { "wood": 6 }, "prod": { "food": 3 }, "pop": 0, "rule": "plain", "hill": false, "needsRoad": true, "unlock": null, "card": "bld-farm", "extra": [],
+      "effect": "식량을 길러요(🍚+3). 우물이 3칸 안, 대장간이 5칸 안에 있으면 하나마다 🍚+1.",
+      "ruleText": "강가의 평야(연두색 땅)에만",
+      "info": "부여 일대에서는 백제 시대 논밭의 흔적이 발굴되기도 했어요. 게임에서는 논과 밭을 단순하게 그렸어요." },
+
+    { "id": "kiln", "name": "토기·기와 가마 공방", "short": "토기 공방", "group": "prod", "icon": "🔥", "w": 2, "h": 2, "main": "clay",
+      "cost": { "wood": 10, "clay": 8 }, "prod": { "clay": 3 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m2", "card": "bld-kiln", "extra": [],
+      "effect": "흙으로 그릇과 기와를 구워 건축 재료를 만들어요(🧱+3).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "부여 정암리 등에서 백제의 가마터가 발견되었어요. 게임 속 공방 모습은 단순하게 그린 창작 재현이에요." },
+
+    { "id": "weaving", "name": "직물 공방", "short": "직물 공방", "group": "prod", "icon": "🧶", "w": 2, "h": 2, "main": "food",
+      "cost": { "wood": 12, "clay": 6 }, "prod": { "food": 1, "culture": 1 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m1", "card": "bld-weaving", "extra": ["art-spindle"],
+      "effect": "옷감을 짜서 식량과 바꾸고(🍚+1), 문화 점수를 올려요(✨+1).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "가락바퀴 같은 도구가 옷감을 만드는 생활을 알려 줘요. 게임 속 공방 건물은 창작 재현이에요." },
+
+    { "id": "smithy", "name": "대장간", "short": "대장간", "group": "prod", "icon": "⚒️", "w": 2, "h": 2, "main": "clay",
+      "cost": { "wood": 14, "clay": 10 }, "prod": { "clay": 1, "wood": 1 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m2", "card": "bld-smithy", "extra": [],
+      "effect": "도구를 만들어 건축 재료(🧱+1)와 나무(🪵+1)를 얻어요. 5칸 안 농경지는 농기구 덕분에 🍚+1.",
+      "ruleText": "빈 땅이나 평야",
+      "info": "백제는 철을 다루는 기술이 뛰어났어요. 게임 속 대장간 모습은 창작 재현이에요." },
+
+    { "id": "temple", "name": "절", "short": "절", "group": "culture", "icon": "🛕", "w": 3, "h": 3,
+      "cost": { "wood": 30, "clay": 30, "food": 20 }, "prod": { "culture": 3 }, "pop": 0, "rule": "land", "hill": true, "needsRoad": true, "unlock": "m3", "card": "bld-temple", "extra": [],
+      "effect": "문화 점수가 올라요(✨+3). '정림사지 자리'에 지으면 ✨+1 더. 주민들이 절에 들러요.",
+      "ruleText": "빈 땅·평야·언덕",
+      "info": "사비에는 정림사, 왕흥사 같은 큰 절이 있었어요. 게임 속 절 건물은 단순하게 그린 창작 재현이에요." },
+
+    { "id": "pagoda", "name": "탑", "short": "탑", "group": "culture", "icon": "🗼", "w": 2, "h": 2,
+      "cost": { "wood": 8, "clay": 25 }, "prod": { "culture": 2 }, "pop": 0, "rule": "land", "hill": true, "needsRoad": false, "unlock": "m4", "card": "bld-pagoda", "extra": ["art-pagoda"],
+      "effect": "문화 점수가 올라요(✨+2). 절에서 2칸 안에 세우면 ✨+2 더.",
+      "ruleText": "빈 땅·평야·언덕",
+      "info": "정림사지 오층석탑을 참고해 단순하게 그린 창작 재현이에요. 실제 탑과 비율과 세부가 달라요." },
+
+    { "id": "school", "name": "교육 및 기술 전수 공간", "short": "기술 전수", "group": "culture", "icon": "📚", "w": 2, "h": 2,
+      "cost": { "wood": 20, "clay": 20 }, "prod": { "culture": 2 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m4", "card": "bld-school", "extra": ["his-exchange"],
+      "effect": "문화 점수가 올라요(✨+2). 기술을 가르쳐 모든 공방의 생산이 +1.",
+      "ruleText": "빈 땅이나 평야",
+      "info": "'기술 전수 공간'은 게임을 위해 만든 이름이고, 건물 모양도 창작 재현이에요." },
+
+    { "id": "palace", "name": "궁궐", "short": "궁궐", "group": "major", "icon": "🏯", "w": 4, "h": 4,
+      "cost": { "wood": 60, "clay": 60, "food": 40 }, "prod": { "culture": 5 }, "pop": 4, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m6", "card": "bld-palace", "extra": ["plc-sabi"],
+      "effect": "문화 점수가 많이 올라요(✨+5). 궁궐 사람 4명. '왕궁 터(추정)' 자리에 지으면 ✨+3 더.",
+      "ruleText": "빈 땅이나 평야 (4×4칸)",
+      "info": "부여 관북리 유적이 사비 시기 왕궁 터로 추정돼요. 왕궁의 정확한 모습과 범위는 아직 연구 중이라 게임 속 궁궐은 창작 재현이에요." },
+
+    { "id": "gate", "name": "성문", "short": "성문", "group": "major", "icon": "🚪", "w": 2, "h": 1,
+      "cost": { "wood": 12, "clay": 18 }, "prod": {}, "pop": 0, "rule": "gate", "hill": true, "needsRoad": false, "unlock": "m5", "card": "bld-gate", "extra": [],
+      "effect": "성문 1개와 성벽 2개 이상이 있으면 마을이 안전해져 집마다 주민 +1명.",
+      "ruleText": "도로와 닿는 땅 (언덕도 돼요)",
+      "info": "게임 속 성문 모양은 창작 재현이에요." },
+
+    { "id": "wall", "name": "성벽", "short": "성벽", "group": "major", "icon": "🧱", "w": 3, "h": 1,
+      "cost": { "clay": 8, "wood": 2 }, "prod": {}, "pop": 0, "rule": "land", "hill": true, "needsRoad": false, "unlock": "m5", "card": "bld-wall", "extra": ["plc-naseong"],
+      "effect": "성문과 함께 마을을 지켜요. '나성 자리'에 쌓으면 한 구간마다 ✨+1.",
+      "ruleText": "빈 땅·평야·언덕",
+      "info": "사비 도성은 부소산성, 나성, 백마강이 감싸고 있었어요. 게임 속 성벽 모양은 단순하게 그린 창작 재현이에요." },
+
+    { "id": "office", "name": "관청", "short": "관청", "group": "major", "icon": "🏛️", "w": 3, "h": 2,
+      "cost": { "wood": 30, "clay": 30 }, "prod": { "culture": 2 }, "pop": 0, "rule": "land", "hill": false, "needsRoad": true, "unlock": "m5", "card": "bld-office", "extra": ["his-22bu"],
+      "effect": "문화 점수(✨+2). 나랏일을 나누어 맡아 마을 전체 생산이 +10%(2곳까지).",
+      "ruleText": "빈 땅이나 평야",
+      "info": "사비 시기 백제에는 22개의 관청(22부)이 있었다고 전해요. 게임 속 관청 건물은 창작 재현이에요." },
+
+    { "id": "port", "name": "나루(선착장)", "short": "선착장", "group": "major", "icon": "⛵", "w": 2, "h": 2,
+      "cost": { "wood": 16, "clay": 4 }, "prod": { "wood": 2, "clay": 1 }, "pop": 0, "rule": "shore", "hill": false, "needsRoad": true, "unlock": "m3", "card": "bld-port", "extra": ["plc-baengma"],
+      "effect": "배로 물자가 들어와 나무(🪵+2)와 건축 재료(🧱+1)를 얻어요.",
+      "ruleText": "강(백마강)에 닿는 땅",
+      "info": "백제 시대 나루의 정확한 위치와 모습은 확실하지 않아요. 게임 속 선착장은 창작 재현이에요." }
+  ]
+}

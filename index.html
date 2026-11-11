@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>백제 역사 체험관</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <link rel="stylesheet" href="css/village.css">
+  <link rel="stylesheet" href="css/crossword.css">
+  <link rel="stylesheet" href="css/defense.css">
+</head>
+<body>
+  <div id="viewport">
+    <div id="stage">
+
+      <!-- 로딩 -->
+      <section id="scr-loading" class="screen active">
+        <div class="loading-box">
+          <img src="assets/logo.svg" alt="" class="loading-logo">
+          <div class="loading-text">사비 백제로 떠날 준비를 하는 중…</div>
+        </div>
+      </section>
+
+      <!-- 백제 역사 체험관: 통합 메인 화면 -->
+      <section id="scr-hub" class="screen">
+        <canvas id="hub-bg" width="1920" height="1080"></canvas>
+        <div class="hub-title">
+          <h1>백제 역사 체험관</h1>
+          <p>사비 백제로 떠나는 시간 여행!</p>
+        </div>
+        <div class="hub-cards" id="hub-cards"></div>
+        <div class="hub-bar">
+          <button class="hub-pill" id="hub-codex">📚 백제 역사 도감 <b id="hub-codex-n">0/0</b></button>
+          <button class="hub-pill" id="hub-stars">⭐ 백제 탐험 별 <b id="hub-stars-n">0</b></button>
+          <button class="hub-pill" id="hub-special">🏛️ 특별 전시 <b id="hub-special-n"></b></button>
+          <div class="hub-pill hub-volume"><button id="hub-mute" aria-label="소리">🔊</button><input type="range" id="hub-vol" min="0" max="100"></div>
+          <button class="hub-pill hold-btn" id="hub-teacher">⚙️ 선생님 설정 <small>3초 누르기</small><i class="hold-fill"></i></button>
+        </div>
+      </section>
+
+      <!-- 백제 역사 도감 -->
+      <section id="scr-codex" class="screen">
+        <h2 class="screen-title">📚 백제 역사 도감</h2>
+        <p class="screen-sub" id="codex-progress"></p>
+        <div class="codex-tabs" id="codex-tabs"></div>
+        <div class="codex-grid" id="codex-grid"></div>
+        <button class="back-btn" data-action="hub">← 체험관으로</button>
+      </section>
+
+      <!-- 새 게임(마을·낱말·방어)이 실행되는 자리: 한 번에 한 게임만 -->
+      <section id="scr-game" class="screen">
+        <button id="game-home" class="game-home" aria-label="체험관으로">🏛️</button>
+      </section>
+
+      <!-- 메인 화면 -->
+      <section id="scr-menu" class="screen">
+        <canvas id="menu-bg" width="1920" height="1080"></canvas>
+        <div class="menu-title">
+          <img src="assets/logo.svg" alt="" class="menu-logo">
+          <h1>백제 보물 발굴 탐험대</h1>
+          <p class="menu-sub">사라진 백제의 보물을 찾아라!</p>
+        </div>
+        <div class="menu-buttons">
+          <button class="big-btn primary" data-action="start"><img src="assets/icons/shovel.svg" alt=""><span>발굴 시작</span></button>
+          <button class="big-btn coop" data-action="coop"><img src="assets/icons/team.svg" alt=""><span>협동 발굴</span></button>
+          <button class="big-btn museum" data-action="museum"><img src="assets/icons/museum.svg" alt=""><span>백제 박물관</span></button>
+          <button class="big-btn" data-action="howto"><img src="assets/icons/book.svg" alt=""><span>게임 방법</span></button>
+          <button class="big-btn teacher hold-btn" data-action="teacher"><img src="assets/icons/gear.svg" alt=""><span>선생님 설정<small>3초 누르기</small></span><i class="hold-fill"></i></button>
+        </div>
+        <div class="menu-rank" id="menu-rank"></div>
+        <button class="back-btn hub-back" data-action="hub">← 체험관으로</button>
+      </section>
+
+      <!-- 협동 인원 선택 -->
+      <section id="scr-players" class="screen">
+        <h2 class="screen-title">몇 명이 함께 발굴할까요?</h2>
+        <p class="screen-sub">테이블 가장자리마다 한 명씩 서서 함께 하나의 유적을 발굴해요.</p>
+        <div class="player-choices">
+          <button class="choice-card" data-players="2"><div class="pc-figure p2"></div><b>2명</b><span>위·아래</span></button>
+          <button class="choice-card" data-players="3"><div class="pc-figure p3"></div><b>3명</b><span>위·아래·왼쪽</span></button>
+          <button class="choice-card" data-players="4"><div class="pc-figure p4"></div><b>4명</b><span>네 방향 모두</span></button>
+        </div>
+        <div class="turn-toggle">
+          <span>참여 방식</span>
+          <button class="seg" data-turn="0">동시에 함께 파기</button>
+          <button class="seg" data-turn="1">순서대로 돌아가며</button>
+        </div>
+        <p class="screen-note" id="touch-note"></p>
+        <button class="back-btn" data-action="menu">← 처음으로</button>
+      </section>
+
+      <!-- 스테이지 선택 -->
+      <section id="scr-stages" class="screen">
+        <h2 class="screen-title">어느 유적지를 발굴할까요?</h2>
+        <p class="screen-sub" id="stage-sub"></p>
+        <div class="stage-map" id="stage-list"></div>
+        <button class="back-btn" data-action="menu">← 처음으로</button>
+      </section>
+
+      <!-- 발굴 브리핑 -->
+      <section id="scr-brief" class="screen">
+        <div class="brief-card">
+          <div class="brief-art"><canvas id="brief-canvas" width="520" height="520"></canvas></div>
+          <div class="brief-text">
+            <div class="brief-site" id="brief-site"></div>
+            <h2 id="brief-title"></h2>
+            <p id="brief-story"></p>
+            <ol id="brief-missions"></ol>
+            <div class="brief-buttons">
+              <button class="big-btn primary" data-action="dig-go"><span>발굴 시작!</span></button>
+              <button class="back-btn inline" data-action="stages">← 다른 유적지</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 발굴 현장 -->
+      <section id="scr-dig" class="screen">
+        <div id="dig-site">
+          <canvas id="cv-floor"></canvas>
+          <canvas id="cv-soil"></canvas>
+          <canvas id="cv-fx"></canvas>
+          <div id="dig-banner"></div>
+          <button id="btn-collect" class="collect-btn hidden" data-action="collect">유물 수습하기</button>
+        </div>
+        <div id="player-panels"></div>
+        <div class="hud hud-tl"><button class="hud-btn" data-action="pause" aria-label="일시정지"><img src="assets/icons/pause.svg" alt=""></button></div>
+        <div class="hud hud-tr"><div class="hud-chip" id="hud-timer">∞</div></div>
+        <div class="hud hud-bl"><div class="hud-chip score" id="hud-score">0</div></div>
+        <div class="hud hud-br"><button class="hud-btn" data-action="sound" id="hud-sound" aria-label="소리"><img src="assets/icons/sound.svg" alt=""></button></div>
+      </section>
+
+      <!-- 게임 방법 -->
+      <section id="scr-howto" class="screen">
+        <h2 class="screen-title">게임 방법</h2>
+        <div class="howto-grid">
+          <div class="howto-card"><img src="assets/icons/shovel.svg" alt=""><b>1. 작은 삽</b><p>넓은 곳의 겉흙을 빠르게 걷어 내요. 유물 가까이에서 쓰면 조사 점수가 줄어요.</p></div>
+          <div class="howto-card"><img src="assets/icons/brush.svg" alt=""><b>2. 발굴 붓</b><p>유물 주변의 흙을 부드럽게 털어 내요. 유물의 모양이 드러나요.</p></div>
+          <div class="howto-card"><img src="assets/icons/finebrush.svg" alt=""><b>3. 정밀 붓</b><p>유물 위의 고운 먼지를 털어 내요. 숨은 문양과 글자를 찾을 수 있어요.</p></div>
+          <div class="howto-card"><img src="assets/icons/camera.svg" alt=""><b>4. 기록 도구</b><p>드러난 유물을 눌러 사진을 찍고 출토 위치를 발굴 수첩에 기록해요.</p></div>
+        </div>
+        <div class="howto-steps">
+          <span>유적지 선택</span><i>›</i><span>흙 걷어 내기</span><i>›</i><span>붓으로 정밀 발굴</span><i>›</i><span>기록</span><i>›</i><span>수습</span><i>›</i><span>탐구 · 퀴즈</span><i>›</i><span>박물관 전시</span>
+        </div>
+        <p class="howto-tip">⭐ 빨리 파는 것보다 <b>조심스럽게, 꼼꼼하게, 함께</b> 발굴하면 별을 더 많이 받아요!</p>
+        <button class="back-btn" data-action="menu">← 처음으로</button>
+      </section>
+
+      <!-- 박물관 -->
+      <section id="scr-museum" class="screen">
+        <div class="museum-head">
+          <h2 class="screen-title">나만의 백제 박물관</h2>
+          <div class="museum-progress"><div class="mp-bar"><i id="mp-fill"></i></div><span id="mp-text"></span></div>
+        </div>
+        <div class="museum-hall" id="museum-hall"></div>
+        <div class="museum-tray-wrap">
+          <div class="tray-label">수장고 <small>유물을 끌어서 전시대에 올려 보세요</small></div>
+          <div class="museum-tray" id="museum-tray"></div>
+        </div>
+        <button class="back-btn" data-action="menu">← 처음으로</button>
+      </section>
+
+      <!-- 모달 / 토스트 -->
+      <div id="overlay" class="hidden"></div>
+      <div id="toasts"></div>
+      <div id="drag-layer"></div>
+
+      <!-- 선생님 설정: 네 모서리 3초 길게 누르기 -->
+      <div class="corner-hold" data-corner="tl"><i></i></div>
+      <div class="corner-hold" data-corner="tr"><i></i></div>
+      <div class="corner-hold" data-corner="bl"><i></i></div>
+      <div class="corner-hold" data-corner="br"><i></i></div>
+
+      <div id="debug-info" class="hidden"></div>
+    </div>
+  </div>
+
+  <div id="fatal" class="hidden">
+    <div class="fatal-box">
+      <h2>앗! 잠깐 문제가 생겼어요</h2>
+      <p id="fatal-msg">화면을 다시 불러오면 이어서 할 수 있어요.</p>
+      <button onclick="location.reload()">다시 시작하기</button>
+    </div>
+  </div>
+
+  <!-- 모든 스크립트는 일반 스크립트로 불러온다 (file:// 더블 클릭 실행 지원) -->
+  <script src="data/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/dig.js"></script>
+  <script src="js/activities.js"></script>
+  <script src="js/museum.js"></script>
+  <script src="app.js"></script>
+  <script src="js/hub.js"></script>
+  <!-- 체험관 게임 모듈: 각 파일은 BaekjeHub.register()로 스스로 등록한다. 파일 하나가 없어도 다른 게임은 동작한다 -->
+  <script src="js/games/village.js"></script>
+  <script src="js/games/crossword.js"></script>
+  <script src="js/games/defense.js"></script>
+</body>
+</html>

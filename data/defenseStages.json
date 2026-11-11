@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "note": "부소산을 막아라! 데이터. 좌표는 1920x1080 지도 기준. 방어 성공은 교육용 가상 시뮬레이션이며 실제 전투 기록이 아니에요.",
+  "gate": { "x": 900, "y": 600, "hp": 100 },
+  "facilities": {
+    "tower": { "name": "활쏘기 진지", "icon": "🏹", "cost": 60, "up": [50, 80], "range": [190, 210, 235], "rate": [0.85, 0.72, 0.6], "dmg": [11, 16, 24],
+      "desc": "가까이 온 적을 저지해요. 일반 보병·정찰병에게 강하고 방패병에게는 약해요. 강화하면 방패병도 잘 막아요." },
+    "wall": { "name": "성벽", "icon": "🧱", "cost": 40, "up": [40, 60], "hp": [140, 240, 360], "repair": 30,
+      "desc": "길 위 네모 칸에 놓아요. 적이 멈춰 서서 성벽을 밀어야 해서 시간을 벌어 줘요. 부서지면 수리할 수 있어요." },
+    "watch": { "name": "감시초소", "icon": "👁️", "cost": 50, "up": [40, 60], "reveal": [240, 300, 360], "boost": [0.15, 0.22, 0.3],
+      "desc": "다음 공격의 방향과 적을 미리 알려 줘요. 숨은 정찰병을 찾아내고, 가까운 활쏘기 진지의 사거리를 늘려 줘요." },
+    "depot": { "name": "보급 창고", "icon": "🌾", "cost": 70, "up": [50, 70], "income": [25, 35, 50],
+      "desc": "공격을 한 번 막을 때마다 물자를 더 보내 줘요. 일찍 지을수록 이득이에요." }
+  },
+  "enemies": {
+    "inf": { "name": "일반 보병", "hp": 30, "speed": 48, "gate": 6, "push": 10, "bounty": 4, "armor": [1, 1, 1],
+      "desc": "가장 흔한 부대예요. 활쏘기 진지로 막아요." },
+    "shield": { "name": "방패병", "hp": 46, "speed": 38, "gate": 8, "push": 12, "bounty": 6, "armor": [0.3, 0.65, 1],
+      "desc": "커다란 방패로 화살을 잘 막아요. 강화한 진지와 성벽으로 시간을 벌어 막아요." },
+    "scout": { "name": "정찰병", "hp": 20, "speed": 100, "gate": 4, "push": 6, "bounty": 5, "armor": [1, 1, 1], "stealth": true,
+      "desc": "아주 빨라요. 감시초소 근처나 진지 바로 옆에서만 보여서 저지할 수 있어요." },
+    "siege": { "name": "공성 수레", "hp": 140, "speed": 22, "gate": 18, "push": 45, "bounty": 15, "armor": [0.6, 0.75, 0.9],
+      "desc": "느리지만 튼튼해요. 성벽과 성문을 세게 밀어요. 여러 진지로 멀리서부터 막아요." }
+  },
+  "paths": {
+    "east":   { "name": "동쪽 큰길", "pts": [[1765,560],[1600,600],[1440,690],[1250,730],[1080,700],[960,670],[900,655]] },
+    "south":  { "name": "남쪽 들길", "pts": [[1130,925],[1110,840],[1020,790],[940,730],[900,655]] },
+    "forest": { "name": "북동 숲길", "pts": [[1560,155],[1480,250],[1360,300],[1300,420],[1240,560],[1140,650],[1020,680],[960,670],[900,655]] },
+    "west":   { "name": "서쪽 나루길", "pts": [[160,600],[300,620],[460,690],[620,720],[760,690],[860,665],[900,655]] },
+    "north":  { "name": "북쪽 산길", "pts": [[640,155],[560,250],[470,380],[470,520],[560,640],[700,690],[820,670],[900,655]] },
+    "raidW":  { "name": "서쪽 창고길", "to": "storeW", "pts": [[160,700],[300,730],[420,800],[540,840],[650,850]] },
+    "raidE":  { "name": "동쪽 창고길", "to": "storeE", "pts": [[1765,800],[1620,815],[1500,850],[1440,862]] }
+  },
+  "spots": {
+    "A1": [1620,700], "A2": [1430,600], "A3": [1300,800], "A4": [1190,805], "A5": [1060,585], "A6": [760,600],
+    "A7": [850,770], "A8": [1040,880], "F1": [1420,400], "F2": [1180,470], "F3": [1560,330], "F4": [1340,560],
+    "W1": [370,520], "W2": [560,790], "W3": [650,585], "W4": [720,790], "N1": [560,400], "N2": [660,270],
+    "C1": [790,500], "C2": [1010,500], "R1": [520,720], "R2": [830,862], "R3": [1440,770]
+  },
+  "slots": {
+    "wE1": [1520,645], "wE2": [1165,715], "wS1": [1065,815], "wS2": [920,692], "wF1": [1330,360], "wF2": [1190,605],
+    "wW1": [380,655], "wW2": [690,705], "wN1": [470,450], "wN2": [630,665], "wR1": [480,820], "wR2": [1560,832]
+  },
+  "stores": {
+    "storeW": { "name": "사비 창고", "x": 705, "y": 850, "food": 100 },
+    "storeE": { "name": "강변 창고", "x": 1390, "y": 868, "food": 100 }
+  },
+  "stages": [
+    {
+      "id": 1, "title": "성문을 지켜라", "sub": "방어 시설 놓기 연습", "topic": "수도 사비", "tutorial": true,
+      "story": "사비 도성 뒤쪽을 지키는 부소산성. 동쪽 큰길과 남쪽 들길로 장난꾸러기 원정대가 몰려온대요! 방어 시설을 놓는 방법을 연습하며 성문을 지켜 보아요.",
+      "goals": ["공격 3번을 막아요", "성문 내구도를 지켜요", "활쏘기 진지와 성벽을 놓아 봐요"],
+      "paths": ["east", "south"],
+      "spots": ["A1","A2","A3","A4","A5","A7","A8","C1","C2"],
+      "slots": ["wE1","wE2","wS1","wS2"],
+      "start": 220, "prep": 70, "waveBonus": 45,
+      "cards": ["plc-sabi", "his-capital"],
+      "badge": { "id": "s1", "name": "성문 지킴이", "icon": "🚪" },
+      "winText": "친구들이 힘을 모아 성문을 지켜 냈어요! 진지와 성벽을 어디에 놓느냐가 중요했지요.",
+      "loseText": "성문이 버티지 못했어요. 진지를 길 가까이에, 성벽은 진지 사거리 안에 놓아 다시 도전해 봐요.",
+      "waves": [
+        [ { "path": "east", "type": "inf", "n": 5, "gap": 1.8, "delay": 0 } ],
+        [ { "path": "east", "type": "inf", "n": 5, "gap": 1.6, "delay": 0 }, { "path": "south", "type": "inf", "n": 4, "gap": 1.8, "delay": 3 } ],
+        [ { "path": "east", "type": "inf", "n": 5, "gap": 1.4, "delay": 0 }, { "path": "east", "type": "shield", "n": 3, "gap": 2.2, "delay": 4 }, { "path": "south", "type": "inf", "n": 5, "gap": 1.5, "delay": 2 } ]
+      ]
+    },
+    {
+      "id": 2, "title": "숲길을 방어하라", "sub": "감시초소로 미리 살피기", "topic": "부소산성의 역할",
+      "story": "숲이 우거진 북동 숲길과 북쪽 산길로 날쌘 정찰병이 숨어서 다가와요. 감시초소를 세워 어느 길로 올지 미리 살피고 숨은 정찰병을 찾아내요.",
+      "goals": ["공격 4번을 막아요", "감시초소로 숨은 정찰병을 찾아요", "여러 길을 나누어 지켜요"],
+      "paths": ["forest", "east", "north"],
+      "spots": ["F1","F2","F3","F4","A1","A2","A5","A6","N1","N2","W3","C1","C2"],
+      "slots": ["wF1","wF2","wE1","wE2","wN1","wN2"],
+      "start": 270, "prep": 70, "waveBonus": 50,
+      "cards": ["plc-busosan", "his-defense"],
+      "badge": { "id": "s2", "name": "숲길 파수꾼", "icon": "🌲" },
+      "winText": "높은 곳에서 멀리 살핀 덕분에 숨어 오던 정찰병까지 모두 찾아냈어요!",
+      "loseText": "숨은 정찰병을 놓쳤어요. 감시초소를 길이 잘 보이는 곳에 세워 다시 도전해 봐요.",
+      "waves": [
+        [ { "path": "forest", "type": "inf", "n": 5, "gap": 1.8, "delay": 0 }, { "path": "forest", "type": "scout", "n": 2, "gap": 2.5, "delay": 7 } ],
+        [ { "path": "east", "type": "inf", "n": 6, "gap": 1.6, "delay": 0 }, { "path": "north", "type": "scout", "n": 4, "gap": 2.4, "delay": 3 } ],
+        [ { "path": "forest", "type": "shield", "n": 3, "gap": 2.4, "delay": 0 }, { "path": "forest", "type": "inf", "n": 4, "gap": 1.6, "delay": 4 }, { "path": "north", "type": "scout", "n": 3, "gap": 2.2, "delay": 2 }, { "path": "east", "type": "scout", "n": 2, "gap": 2.5, "delay": 9 } ],
+        [ { "path": "forest", "type": "inf", "n": 5, "gap": 1.5, "delay": 0 }, { "path": "east", "type": "inf", "n": 5, "gap": 1.5, "delay": 2 }, { "path": "north", "type": "scout", "n": 4, "gap": 2.0, "delay": 3 }, { "path": "north", "type": "shield", "n": 2, "gap": 2.5, "delay": 8 }, { "path": "forest", "type": "scout", "n": 3, "gap": 2.0, "delay": 12 } ]
+      ]
+    },
+    {
+      "id": 3, "title": "무너진 성벽을 고쳐라", "sub": "공격 중에도 수리하기", "topic": "백제의 성곽",
+      "story": "지난 비바람에 길목의 성벽이 많이 상했어요. 느리지만 힘센 공성 수레도 다가온대요. 물자를 나누어 성벽을 고치고 진지를 세워 성문을 지켜요.",
+      "goals": ["공격 4번을 막아요", "부서진 성벽을 수리해요", "수리와 새 시설에 물자를 알맞게 나누어요"],
+      "paths": ["west", "south", "east"],
+      "spots": ["W1","W2","W3","W4","A6","A7","A3","A4","A2","A8","C1","C2"],
+      "slots": ["wW1","wW2","wS1","wS2","wE1","wE2"],
+      "preWalls": [ { "slot": "wW2", "frac": 0.3 }, { "slot": "wS1", "frac": 0.35 }, { "slot": "wE2", "frac": 0.3 } ],
+      "start": 260, "prep": 70, "waveBonus": 55,
+      "cards": ["his-fortress", "bld-wall", "plc-naseong"],
+      "badge": { "id": "s3", "name": "성벽 수리 장인", "icon": "🧱" },
+      "winText": "성벽을 제때 고친 덕분에 공성 수레도 성문 앞까지 오지 못했어요!",
+      "loseText": "성벽이 무너진 채로 남아 있었어요. 공격 중에도 성벽을 눌러 수리해 보아요.",
+      "waves": [
+        [ { "path": "west", "type": "inf", "n": 6, "gap": 1.6, "delay": 0 }, { "path": "south", "type": "inf", "n": 4, "gap": 1.8, "delay": 4 } ],
+        [ { "path": "east", "type": "inf", "n": 5, "gap": 1.6, "delay": 0 }, { "path": "west", "type": "siege", "n": 1, "gap": 1, "delay": 3 }, { "path": "west", "type": "inf", "n": 3, "gap": 1.6, "delay": 8 } ],
+        [ { "path": "south", "type": "siege", "n": 1, "gap": 1, "delay": 0 }, { "path": "south", "type": "shield", "n": 3, "gap": 2.2, "delay": 3 }, { "path": "west", "type": "inf", "n": 6, "gap": 1.5, "delay": 2 }, { "path": "east", "type": "inf", "n": 4, "gap": 1.6, "delay": 6 } ],
+        [ { "path": "west", "type": "siege", "n": 2, "gap": 9, "delay": 0 }, { "path": "east", "type": "siege", "n": 1, "gap": 1, "delay": 6 }, { "path": "south", "type": "inf", "n": 6, "gap": 1.4, "delay": 2 }, { "path": "east", "type": "shield", "n": 3, "gap": 2.2, "delay": 10 } ]
+      ]
+    },
+    {
+      "id": 4, "title": "보급품을 지켜라", "sub": "식량 창고와 자원 관리", "topic": "사비 시대의 생활",
+      "story": "사비 사람들이 모아 둔 식량 창고를 노리는 원정대가 창고길로 몰래 다가와요. 성문과 두 창고를 함께 지키고, 보급 창고로 물자를 늘려 끝까지 버텨요.",
+      "goals": ["공격 5번을 막아요", "사비 창고와 강변 창고의 식량을 지켜요", "보급 창고로 물자를 늘려요"],
+      "paths": ["east", "south", "raidW", "raidE"],
+      "spots": ["A1","A2","A3","A4","A5","A6","A7","R1","R2","R3","C1","C2"],
+      "slots": ["wE1","wE2","wS1","wS2","wR1","wR2"],
+      "stores": ["storeW", "storeE"],
+      "start": 280, "prep": 70, "waveBonus": 50,
+      "cards": ["his-life", "plc-baengma"],
+      "badge": { "id": "s4", "name": "보급 지킴이", "icon": "🌾" },
+      "winText": "창고의 식량을 지키고 물자도 알뜰하게 써서 마지막 공격까지 버텼어요!",
+      "loseText": "창고나 성문을 지키지 못했어요. 창고길에도 진지와 성벽을 나누어 놓아 보아요.",
+      "waves": [
+        [ { "path": "raidW", "type": "inf", "n": 4, "gap": 1.8, "delay": 0 }, { "path": "east", "type": "inf", "n": 4, "gap": 1.8, "delay": 3 } ],
+        [ { "path": "raidE", "type": "scout", "n": 3, "gap": 2.4, "delay": 0 }, { "path": "south", "type": "inf", "n": 5, "gap": 1.6, "delay": 2 }, { "path": "raidW", "type": "inf", "n": 3, "gap": 1.8, "delay": 6 } ],
+        [ { "path": "raidW", "type": "shield", "n": 3, "gap": 2.4, "delay": 0 }, { "path": "raidE", "type": "inf", "n": 5, "gap": 1.6, "delay": 2 }, { "path": "east", "type": "inf", "n": 4, "gap": 1.6, "delay": 5 } ],
+        [ { "path": "raidE", "type": "siege", "n": 1, "gap": 1, "delay": 0 }, { "path": "raidW", "type": "scout", "n": 4, "gap": 2.0, "delay": 3 }, { "path": "south", "type": "shield", "n": 3, "gap": 2.2, "delay": 2 }, { "path": "east", "type": "inf", "n": 5, "gap": 1.5, "delay": 6 } ],
+        [ { "path": "raidW", "type": "inf", "n": 5, "gap": 1.5, "delay": 0 }, { "path": "raidE", "type": "inf", "n": 5, "gap": 1.5, "delay": 2 }, { "path": "east", "type": "siege", "n": 1, "gap": 1, "delay": 4 }, { "path": "south", "type": "scout", "n": 4, "gap": 2.0, "delay": 6 }, { "path": "raidW", "type": "shield", "n": 3, "gap": 2.2, "delay": 10 } ]
+      ]
+    },
+    {
+      "id": 5, "title": "부소산 최후의 방어", "sub": "네 친구가 함께하는 마지막 임무", "topic": "백제의 역사와 문화", "final": true,
+      "story": "다섯 갈래 길로 원정대가 한꺼번에 몰려와요! 성벽·진지·보급·정찰 담당이 서로 의논하며 역할을 나누어야 지킬 수 있는 마지막 임무예요. (게임 속 상상 이야기)",
+      "goals": ["공격 5번을 막아요", "다섯 갈래 길을 나누어 지켜요", "네 가지 역할이 모두 힘을 합쳐요"],
+      "paths": ["east", "south", "forest", "west", "north"],
+      "spots": ["A1","A2","A3","A4","A5","A6","A7","F1","F2","F3","F4","W1","W2","W3","W4","N1","N2","C1","C2"],
+      "slots": ["wE1","wE2","wS1","wS2","wF1","wF2","wW1","wW2","wN1","wN2"],
+      "start": 400, "prep": 80, "waveBonus": 60,
+      "cards": ["his-fall", "bld-gate"],
+      "badge": { "id": "guardian", "name": "백제 수호자", "icon": "🛡️" },
+      "winText": "게임 속 이야기에서는 네 친구가 힘을 합쳐 부소산성을 끝까지 지켜 냈어요! 이것은 상상으로 만든 교육용 시뮬레이션이에요.",
+      "loseText": "다섯 갈래 길을 모두 지키기는 어려웠어요. 역할을 나누어 다시 의논해 보아요.",
+      "waves": [
+        [ { "path": "east", "type": "inf", "n": 6, "gap": 1.5, "delay": 0 }, { "path": "west", "type": "inf", "n": 6, "gap": 1.5, "delay": 3 } ],
+        [ { "path": "forest", "type": "scout", "n": 5, "gap": 2.0, "delay": 0 }, { "path": "north", "type": "inf", "n": 6, "gap": 1.5, "delay": 2 }, { "path": "south", "type": "shield", "n": 3, "gap": 2.2, "delay": 4 } ],
+        [ { "path": "west", "type": "siege", "n": 1, "gap": 1, "delay": 0 }, { "path": "east", "type": "shield", "n": 4, "gap": 2.0, "delay": 2 }, { "path": "forest", "type": "inf", "n": 6, "gap": 1.4, "delay": 3 }, { "path": "north", "type": "scout", "n": 4, "gap": 2.0, "delay": 6 } ],
+        [ { "path": "south", "type": "siege", "n": 1, "gap": 1, "delay": 0 }, { "path": "north", "type": "siege", "n": 1, "gap": 1, "delay": 6 }, { "path": "west", "type": "shield", "n": 4, "gap": 2.0, "delay": 2 }, { "path": "east", "type": "inf", "n": 6, "gap": 1.4, "delay": 3 }, { "path": "forest", "type": "scout", "n": 5, "gap": 1.8, "delay": 8 } ],
+        [ { "path": "east", "type": "inf", "n": 6, "gap": 1.3, "delay": 0 }, { "path": "east", "type": "shield", "n": 3, "gap": 2.0, "delay": 8 }, { "path": "south", "type": "siege", "n": 1, "gap": 1, "delay": 2 }, { "path": "south", "type": "inf", "n": 5, "gap": 1.4, "delay": 6 }, { "path": "forest", "type": "scout", "n": 5, "gap": 1.8, "delay": 4 }, { "path": "forest", "type": "shield", "n": 3, "gap": 2.0, "delay": 12 }, { "path": "west", "type": "inf", "n": 6, "gap": 1.4, "delay": 3 }, { "path": "west", "type": "siege", "n": 1, "gap": 1, "delay": 14 }, { "path": "north", "type": "shield", "n": 3, "gap": 2.0, "delay": 5 }, { "path": "north", "type": "scout", "n": 4, "gap": 1.8, "delay": 10 } ]
+      ]
+    }
+  ]
+}
